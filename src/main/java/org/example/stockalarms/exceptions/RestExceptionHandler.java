@@ -1,9 +1,9 @@
 package org.example.stockalarms.exceptions;
 
 import org.example.stockalarms.dto.Response;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.example.stockalarms.exceptions.UserException.*;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -22,10 +22,11 @@ public class RestExceptionHandler {
     public Response handleUserAlreadyExistsException(UserAlreadyExistsException ex){
         return Response.builder()
                 .statusCode(HttpStatus.CONFLICT.value())
-                .message("a user with this email is already registered")
+                .message("email already taken")
                 .dateTime(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))))
                 .build();
     }
+
     @ExceptionHandler(ValidationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Response handleValidationException(ValidationException ex){
@@ -35,5 +36,22 @@ public class RestExceptionHandler {
                 .dateTime(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))))
                 .build();
     }
-
+    @ExceptionHandler(BadCredentialsException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public Response handleBadCredentialsException(BadCredentialsException ex){
+        return Response.builder()
+                .statusCode(HttpStatus.UNAUTHORIZED.value())
+                .message(ex.getMessage())
+                .dateTime(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))))
+                .build();
+    }
+    @ExceptionHandler(UsernameNotFoundException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public Response handleUsernameNotFoundException(UsernameNotFoundException ex){
+        return Response.builder()
+                .statusCode(HttpStatus.UNAUTHORIZED.value())
+                .message("email or password incorrect")
+                .dateTime(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))))
+                .build();
+    }
 }

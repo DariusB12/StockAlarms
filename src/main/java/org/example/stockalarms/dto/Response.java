@@ -1,12 +1,10 @@
 package org.example.stockalarms.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.stockalarms.model.user.User;
+import org.example.stockalarms.model.UserEntity;
 
 import java.time.LocalDateTime;
 
@@ -21,7 +19,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Response {
-    User user;
+    UserEntity user;
     Integer statusCode;
     String message;
     LocalDateTime dateTime;

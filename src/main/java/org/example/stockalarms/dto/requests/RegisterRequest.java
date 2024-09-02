@@ -1,10 +1,10 @@
-package org.example.stockalarms.dto;
+package org.example.stockalarms.dto.requests;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.stockalarms.model.user.User;
 
 /**
  * This class encapsulates all the data that can be requested by the client.
@@ -13,6 +13,10 @@ import org.example.stockalarms.model.user.User;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Request {
-    User user;
+public class RegisterRequest {
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
+    private String confirmPassword;
 }

@@ -1,16 +1,15 @@
 package org.example.stockalarms.validator;
 
 import org.example.stockalarms.exceptions.ValidationException;
-import org.example.stockalarms.model.user.User;
+import org.example.stockalarms.model.UserEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 @Component
-public class UserValidator implements IValidator<User> {
+public class UserValidator implements IValidator<UserEntity> {
     @Override
-    public void validate(User entity) throws ValidationException {
+    public void validate(UserEntity entity) throws ValidationException {
         String errors = "";
         if(entity == null)
             throw new ValidationException("invalid user");
@@ -39,11 +38,12 @@ public class UserValidator implements IValidator<User> {
                 !password.matches(".*[a-z].*") ||
                 !password.matches(".*\\W.*") ||
                 !password.matches(".*[0-9].*"))
-            errors += "the password should contain at least 1 upperCase letter,\n " +
-                    "1 lower case letter\n" +
-                    "1 number\n" +
-                    "a special character\n" +
-                    "and it should be at least 8 characters in length";
+            errors += """
+                    the password should contain at least 1 upperCase letter,
+                    1 lower case letter
+                    1 number
+                    a special character
+                    and it should be at least 8 characters in length""";
         if (!errors.isEmpty())
             throw new ValidationException(errors);
     }
