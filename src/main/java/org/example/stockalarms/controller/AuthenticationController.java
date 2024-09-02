@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/authentication")
-@CrossOrigin(origins = "${cross-origin-resource-sharing}")
 public class AuthenticationController {
     private final UserService userServiceImpl;
 
