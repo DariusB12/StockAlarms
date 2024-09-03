@@ -52,10 +52,9 @@ public class UserServiceImpl implements UserService {
         savedUser.setPassword(null);
         return Response.builder()
                 .user(savedUser)
-                .dateTime(LocalDateTime.now())
+                .dateTime(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))))
                 .statusCode(HttpStatus.OK.value())
                 .message("user registered with success")
-                .dateTime(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))))
                 .build();
 
     }
@@ -72,7 +71,7 @@ public class UserServiceImpl implements UserService {
         UserEntity user = optFoundUser.get();
         user.setPassword(null);
         return Response.builder()
-                .dateTime(LocalDateTime.now())
+                .dateTime(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))))
                 .statusCode(HttpStatus.OK.value())
                 .message("user logged in with success")
                 .user(user)
