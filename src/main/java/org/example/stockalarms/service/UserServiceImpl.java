@@ -72,6 +72,9 @@ public class UserServiceImpl implements UserService {
         UserEntity user = optFoundUser.get();
         user.setPassword(null);
         return Response.builder()
+                .dateTime(LocalDateTime.now())
+                .statusCode(HttpStatus.OK.value())
+                .message("user logged in with success")
                 .user(user)
                 .build();
     }
