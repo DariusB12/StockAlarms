@@ -1,6 +1,6 @@
 package org.example.stockalarms.validator;
 
-import org.example.stockalarms.exceptions.ValidationException;
+import org.example.stockalarms.exceptions.customExceptions.ValidationException;
 import org.example.stockalarms.model.UserEntity;
 import org.springframework.stereotype.Component;
 

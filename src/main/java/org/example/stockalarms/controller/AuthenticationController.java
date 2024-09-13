@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.example.stockalarms.dto.requests.LogInRequest;
 import org.example.stockalarms.dto.requests.RegisterRequest;
 import org.example.stockalarms.dto.Response;
-import org.example.stockalarms.exceptions.UserException.*;
-import org.example.stockalarms.exceptions.ValidationException;
-import org.example.stockalarms.service.UserService;
+import org.example.stockalarms.exceptions.customExceptions.UserException.*;
+import org.example.stockalarms.exceptions.customExceptions.ValidationException;
+import org.example.stockalarms.service.user.UserService;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package org.example.stockalarms.exceptions;
+package org.example.stockalarms.exceptions.customExceptions;
 
 public class ValidationException extends Exception{
     public ValidationException() {

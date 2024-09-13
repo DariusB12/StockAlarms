@@ -1,11 +1,12 @@
 package org.example.stockalarms.exceptions;
 
 import org.example.stockalarms.dto.Response;
+import org.example.stockalarms.exceptions.customExceptions.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.example.stockalarms.exceptions.UserException.*;
+import org.example.stockalarms.exceptions.customExceptions.UserException.*;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
