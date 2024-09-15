@@ -1,9 +1,13 @@
 package org.example.stockalarms.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
@@ -11,6 +15,8 @@ import java.util.*;
 @Entity
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "users")
 public class UserEntity implements UserDetails{
 
@@ -28,21 +34,14 @@ public class UserEntity implements UserDetails{
     private String password;
 
 
-    public UserEntity(Long id, String firstName, String lastName, String email, String password) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
-
-    public UserEntity() {
-    }
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Alarm> alarms;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
     }
+
 
     @Override
     public String getUsername() {

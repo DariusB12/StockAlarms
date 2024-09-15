@@ -1,8 +1,8 @@
 package org.example.stockalarms.service.user;
 
-import org.example.stockalarms.dto.requests.LogInRequest;
-import org.example.stockalarms.dto.requests.RegisterRequest;
-import org.example.stockalarms.dto.Response;
+import org.example.stockalarms.utils.requests.LogInRequest;
+import org.example.stockalarms.utils.requests.RegisterRequest;
+import org.example.stockalarms.utils.Response;
 import org.example.stockalarms.exceptions.customExceptions.UserException;
 import org.example.stockalarms.exceptions.customExceptions.ValidationException;
 import org.springframework.security.authentication.BadCredentialsException;

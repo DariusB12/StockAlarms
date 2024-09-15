@@ -1,4 +1,4 @@
-package org.example.stockalarms.dto.requests;
+package org.example.stockalarms.utils.requests;
 
 
 import lombok.AllArgsConstructor;

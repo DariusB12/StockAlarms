@@ -1,6 +1,6 @@
 package org.example.stockalarms.exceptions;
 
-import org.example.stockalarms.dto.Response;
+import org.example.stockalarms.utils.Response;
 import org.example.stockalarms.exceptions.customExceptions.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;

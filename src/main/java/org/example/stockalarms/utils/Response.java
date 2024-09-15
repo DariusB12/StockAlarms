@@ -1,12 +1,13 @@
-package org.example.stockalarms.dto;
+package org.example.stockalarms.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.stockalarms.model.UserEntity;
+import org.example.stockalarms.utils.dto.dtos.StockDTO;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * This class intend to encapsulate any response given by the backend side to the client.
@@ -19,7 +20,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Response {
-    UserEntity user;
+    List<String> stockSymbols;
+    StockDTO stockDTO;
     Integer statusCode;
     String message;
     LocalDateTime dateTime;
