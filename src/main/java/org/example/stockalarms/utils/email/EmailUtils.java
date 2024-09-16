@@ -11,7 +11,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class EmailUtils {
     /**
-     * Creates the html page content for the stock alarm email
+     * Creates the html page content for the alphaVantage alarm email
      * @return a String with the html content
      */
     public String getHtmlStockAlarmPage() {
@@ -24,7 +24,7 @@ public class EmailUtils {
                 "</style>" +
                 "</head>" +
                 "<body>" +
-                "<h1>Alarm with the stock price change</h1>" +
+                "<h1>Alarm with the alphaVantage price change</h1>" +
                 "<p>content1</p>" +
                 "<p>content2</p>" +
 

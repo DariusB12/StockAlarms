@@ -8,5 +8,4 @@ import lombok.Data;
 public class StockDTO {
     private String symbol;
     private Double currentPrice;
-    private String currency;
 }

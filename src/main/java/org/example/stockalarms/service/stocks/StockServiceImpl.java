@@ -1,8 +1,15 @@
 package org.example.stockalarms.service.stocks;
 
+import lombok.RequiredArgsConstructor;
 import org.example.stockalarms.utils.Response;
+import org.example.stockalarms.utils.alphaVantage.AlphaVantageUtils;
+import org.example.stockalarms.utils.alphaVantage.json.TimeSeries;
+import org.example.stockalarms.utils.alphaVantage.json.TimeSeriesIntradayResponse;
+import org.example.stockalarms.utils.dto.dtos.StockDTO;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,11 +17,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+@RequiredArgsConstructor
 @Service
 public class StockServiceImpl implements StockService{
+    private final AlphaVantageUtils alphaVantageUtils;
+    private final RestTemplate restTemplate;
     @Override
     public Response getAllStockSymbols() {
         List<String> symbols = new ArrayList<>();
@@ -36,7 +47,7 @@ public class StockServiceImpl implements StockService{
                     .stockSymbols(symbols)
                     .dateTime(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))))
                     .statusCode(HttpStatus.OK.value())
-                    .message("stock symbols retrieved with success")
+                    .message("alphaVantage symbols retrieved with success")
                     .build();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -45,6 +56,33 @@ public class StockServiceImpl implements StockService{
 
     @Override
     public Response getStockData(String symbol) {
-        return null;
+        TimeSeriesIntradayResponse response = getTimeSeriesIntradayResponse(symbol);
+        StockDTO stockDTO = getStockDTO(response);
+
+        return Response.builder()
+                .stockDTO(stockDTO)
+                .message("stock retrieved with success")
+                .statusCode(HttpStatus.OK.value())
+                .build();
+    }
+
+    /**
+     * Retrieves from an intraday response the latest stock data (StockDTO properties)
+     */
+    private StockDTO getStockDTO(TimeSeriesIntradayResponse response) {
+        Map.Entry<String,TimeSeries> entry = response.getTimeSeries().entrySet().iterator().next();
+
+        return StockDTO.builder()
+                .symbol(response.getMetaData().getSymbol())
+                .currentPrice(entry.getValue().getClose())
+                .build();
+    }
+
+    /**
+     * Sends an HTTP GET request to alpha vantage Api to get intraday data about specified symbol for interval of 5 minutes
+     */
+    private TimeSeriesIntradayResponse getTimeSeriesIntradayResponse(String symbol){
+        String url = alphaVantageUtils.getIntraDayStockDataURL(symbol);
+        return restTemplate.getForEntity(url, TimeSeriesIntradayResponse.class).getBody();
     }
 }
