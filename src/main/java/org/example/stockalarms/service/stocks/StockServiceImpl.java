@@ -1,6 +1,7 @@
 package org.example.stockalarms.service.stocks;
 
 import lombok.RequiredArgsConstructor;
+import org.example.stockalarms.service.alphaVantage.AlphaVantageService;
 import org.example.stockalarms.utils.Response;
 import org.example.stockalarms.utils.alphaVantage.AlphaVantageUtils;
 import org.example.stockalarms.utils.alphaVantage.json.TimeSeries;
@@ -24,8 +25,8 @@ import java.util.regex.Pattern;
 @RequiredArgsConstructor
 @Service
 public class StockServiceImpl implements StockService{
+    private final AlphaVantageService alphaVantageService;
     private final AlphaVantageUtils alphaVantageUtils;
-    private final RestTemplate restTemplate;
     @Override
     public Response getAllStockSymbols() {
         List<String> symbols = new ArrayList<>();
@@ -56,33 +57,13 @@ public class StockServiceImpl implements StockService{
 
     @Override
     public Response getStockData(String symbol) {
-        TimeSeriesIntradayResponse response = getTimeSeriesIntradayResponse(symbol);
-        StockDTO stockDTO = getStockDTO(response);
+        TimeSeriesIntradayResponse response = alphaVantageService.getTimeSeriesIntradayResponse(symbol);
+        StockDTO stockDTO = alphaVantageUtils.getStockDTO(response);
 
         return Response.builder()
                 .stockDTO(stockDTO)
                 .message("stock retrieved with success")
                 .statusCode(HttpStatus.OK.value())
                 .build();
-    }
-
-    /**
-     * Retrieves from an intraday response the latest stock data (StockDTO properties)
-     */
-    private StockDTO getStockDTO(TimeSeriesIntradayResponse response) {
-        Map.Entry<String,TimeSeries> entry = response.getTimeSeries().entrySet().iterator().next();
-
-        return StockDTO.builder()
-                .symbol(response.getMetaData().getSymbol())
-                .currentPrice(entry.getValue().getClose())
-                .build();
-    }
-
-    /**
-     * Sends an HTTP GET request to alpha vantage Api to get intraday data about specified symbol for interval of 5 minutes
-     */
-    private TimeSeriesIntradayResponse getTimeSeriesIntradayResponse(String symbol){
-        String url = alphaVantageUtils.getIntraDayStockDataURL(symbol);
-        return restTemplate.getForEntity(url, TimeSeriesIntradayResponse.class).getBody();
     }
 }

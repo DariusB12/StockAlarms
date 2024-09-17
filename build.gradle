@@ -52,6 +52,11 @@ dependencies {
 
     // Spring Starter Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    //JUnit5 for tests
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.0'
+
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
