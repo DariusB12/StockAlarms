@@ -1,4 +1,4 @@
-package org.example.stockalarms.utils.dto.dtos;
+package org.example.stockalarms.dto;
 
 import lombok.Builder;
 import lombok.Data;

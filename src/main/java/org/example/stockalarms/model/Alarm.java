@@ -24,8 +24,8 @@ public class Alarm implements Runnable{
 
     private String symbol;
     private Double initialPrice;
-    private Double variance; // [0,100] percentage
-    private Double target; // [0,100] percentage
+    private Double variance; // [-100,100] percentage
+    private Double target; // [-100,100] percentage
     private Boolean active;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -35,5 +35,13 @@ public class Alarm implements Runnable{
     @Override
     public void run() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "symbol: " + symbol +
+                ", initialPrice: " + initialPrice +
+                ", variance: " + variance +
+                ", target: " + target;
     }
 }

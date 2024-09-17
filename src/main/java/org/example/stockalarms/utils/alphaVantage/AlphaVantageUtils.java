@@ -2,9 +2,8 @@ package org.example.stockalarms.utils.alphaVantage;
 
 import org.example.stockalarms.utils.alphaVantage.json.TimeSeries;
 import org.example.stockalarms.utils.alphaVantage.json.TimeSeriesIntradayResponse;
-import org.example.stockalarms.utils.dto.dtos.StockDTO;
+import org.example.stockalarms.dto.StockDTO;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;

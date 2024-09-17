@@ -6,23 +6,14 @@ import org.example.stockalarms.model.repo.SymbolRepo;
 import org.example.stockalarms.service.alphaVantage.AlphaVantageService;
 import org.example.stockalarms.utils.Response;
 import org.example.stockalarms.utils.alphaVantage.AlphaVantageUtils;
-import org.example.stockalarms.utils.alphaVantage.json.TimeSeries;
 import org.example.stockalarms.utils.alphaVantage.json.TimeSeriesIntradayResponse;
-import org.example.stockalarms.utils.dto.dtos.StockDTO;
-import org.springframework.context.annotation.Bean;
+import org.example.stockalarms.dto.StockDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.regex.Pattern;
 
 @RequiredArgsConstructor
 @Service

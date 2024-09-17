@@ -1,5 +1,6 @@
 package org.example.stockalarms.exceptions;
 
+import org.example.stockalarms.exceptions.customExceptions.AlarmAlreadyDefinedException;
 import org.example.stockalarms.utils.Response;
 import org.example.stockalarms.exceptions.customExceptions.ValidationException;
 import org.springframework.http.HttpStatus;
@@ -52,6 +53,15 @@ public class RestExceptionHandler {
         return Response.builder()
                 .statusCode(HttpStatus.UNAUTHORIZED.value())
                 .message("email or password incorrect")
+                .dateTime(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))))
+                .build();
+    }
+    @ExceptionHandler(AlarmAlreadyDefinedException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public Response handleAlarmAlreadyDefinedException(AlarmAlreadyDefinedException ex){
+        return Response.builder()
+                .statusCode(HttpStatus.CONFLICT.value())
+                .message("alarm already defined")
                 .dateTime(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))))
                 .build();
     }

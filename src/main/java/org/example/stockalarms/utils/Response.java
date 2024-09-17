@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.stockalarms.model.Symbol;
-import org.example.stockalarms.utils.dto.dtos.StockDTO;
+import org.example.stockalarms.dto.AlarmDTO;
+import org.example.stockalarms.dto.StockDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,6 +23,7 @@ import java.util.List;
 public class Response {
     List<String> stockSymbols;
     StockDTO stockDTO;
+    AlarmDTO alarmDTO;
     Integer statusCode;
     String message;
     LocalDateTime dateTime;

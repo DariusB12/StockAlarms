@@ -1,6 +1,7 @@
 package org.example.stockalarms.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.stockalarms.model.Alarm;
 import org.example.stockalarms.service.email.EmailServiceImpl;
 import org.example.stockalarms.utils.email.EmailUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,6 @@ public class TestController {
     private final EmailUtils emailUtils;
     @PostMapping("sendEmail")
     public void testSendEmail(@RequestParam String email){
-        emailService.sendHtmlEmail(email,"StockAlarmsTest",emailUtils.getHtmlStockAlarmPage());
+        emailService.sendHtmlEmail(email,"StockAlarmsTest",emailUtils.getHtmlStockAlarmPage(Alarm.builder().build(),true));
     }
 }
