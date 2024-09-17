@@ -1,4 +1,4 @@
-package org.example.stockalarms;
+package org.example.stockalarms.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

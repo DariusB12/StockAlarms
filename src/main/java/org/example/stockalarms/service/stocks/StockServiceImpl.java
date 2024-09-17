@@ -1,6 +1,8 @@
 package org.example.stockalarms.service.stocks;
 
 import lombok.RequiredArgsConstructor;
+import org.example.stockalarms.model.Symbol;
+import org.example.stockalarms.model.repo.SymbolRepo;
 import org.example.stockalarms.service.alphaVantage.AlphaVantageService;
 import org.example.stockalarms.utils.Response;
 import org.example.stockalarms.utils.alphaVantage.AlphaVantageUtils;
@@ -24,35 +26,22 @@ import java.util.regex.Pattern;
 
 @RequiredArgsConstructor
 @Service
-public class StockServiceImpl implements StockService{
+public class StockServiceImpl implements StockService {
     private final AlphaVantageService alphaVantageService;
     private final AlphaVantageUtils alphaVantageUtils;
+    private final SymbolRepo symbolRepo;
+
     @Override
     public Response getAllStockSymbols() {
-        List<String> symbols = new ArrayList<>();
-        try{
-            Scanner scanner = new Scanner(new File("src/main/resources/nasdaq_stock_symbols.csv"));
-            boolean firstLine = true;
-            while(scanner.hasNextLine()){
-                if(firstLine) {
-                    scanner.nextLine();
-                    firstLine = false;
-                    continue;
-                }
-                String line = scanner.nextLine();
-                String symbol = line.split(",")[0];
-                if(Pattern.compile("^[A-Za-z0-9]+$").matcher(symbol).matches())
-                    symbols.add(symbol);
-            }
-            return Response.builder()
-                    .stockSymbols(symbols)
-                    .dateTime(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))))
-                    .statusCode(HttpStatus.OK.value())
-                    .message("alphaVantage symbols retrieved with success")
-                    .build();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        List<String> symbols = symbolRepo.findAll().stream().map(Symbol::getName).toList();
+
+        return Response.builder()
+                .stockSymbols(symbols)
+                .dateTime(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))))
+                .statusCode(HttpStatus.OK.value())
+                .message("alphaVantage symbols retrieved with success")
+                .build();
+
     }
 
     @Override

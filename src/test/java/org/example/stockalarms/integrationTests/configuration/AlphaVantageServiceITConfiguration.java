@@ -1,21 +1,20 @@
 package org.example.stockalarms.integrationTests.configuration;
 
-import org.example.stockalarms.integrationTests.utils.AlphaVantageUtilsTest;
+import org.example.stockalarms.integrationTests.utils.AlphaVantageUtilsIT;
 import org.example.stockalarms.service.alphaVantage.AlphaVantageService;
-import org.example.stockalarms.service.stocks.StockServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class AlphaVantageServiceTestConfiguration {
+public class AlphaVantageServiceITConfiguration {
     @Bean
     public RestTemplate restTemplate(){
         return new RestTemplate();
     }
     @Bean
-    public AlphaVantageUtilsTest alphaVantageUtilsTest(){
-        return new AlphaVantageUtilsTest();
+    public AlphaVantageUtilsIT alphaVantageUtilsTest(){
+        return new AlphaVantageUtilsIT();
     }
     @Bean
     public AlphaVantageService alphaVantageService(){

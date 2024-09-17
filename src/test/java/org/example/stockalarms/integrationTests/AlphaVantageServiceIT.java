@@ -1,6 +1,6 @@
 package org.example.stockalarms.integrationTests;
 
-import org.example.stockalarms.integrationTests.configuration.AlphaVantageServiceTestConfiguration;
+import org.example.stockalarms.integrationTests.configuration.AlphaVantageServiceITConfiguration;
 import org.example.stockalarms.service.alphaVantage.AlphaVantageService;
 import org.example.stockalarms.utils.alphaVantage.json.MetaData;
 import org.example.stockalarms.utils.alphaVantage.json.TimeSeries;
@@ -16,8 +16,8 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = AlphaVantageServiceTestConfiguration.class)
-public class AlphaVantageServiceTest {
+@SpringBootTest(classes = AlphaVantageServiceITConfiguration.class)
+public class AlphaVantageServiceIT {
     @Autowired
     public AlphaVantageService alphaVantageService;
 

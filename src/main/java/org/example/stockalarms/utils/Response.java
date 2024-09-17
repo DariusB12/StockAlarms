@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.example.stockalarms.model.Symbol;
 import org.example.stockalarms.utils.dto.dtos.StockDTO;
 
 import java.time.LocalDateTime;

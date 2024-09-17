@@ -15,7 +15,7 @@ public class StockController {
     private final StockService stockService;
 
     /**
-     * Retrieves all the alphaVantage symbols from .csv file
+     * Retrieves all the alphaVantage symbols from DB
      * @return Response with all alphaVantage symbol names
      */
     @GetMapping
