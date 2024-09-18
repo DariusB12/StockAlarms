@@ -30,7 +30,7 @@ public class AlarmMonitoringService{
     public void monitorAlarms(){
         for(Alarm alarm : alarmRepo.findAllByActiveIsTrue()){
             concurrencyManager.submitTask(()-> alarmRepo.save(alarmUtils.updateAlarmData(alarm)));
-//            System.out.println("Alarm: " + alarm + " was updated-------------------------------");
+            System.out.println("Alarm: " + alarm + " was updated-------------------------------");
         }
     }
 

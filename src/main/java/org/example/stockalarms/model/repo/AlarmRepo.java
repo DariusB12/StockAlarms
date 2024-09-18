@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface AlarmRepo extends JpaRepository<Alarm,Integer> {
-    Optional<Alarm> findBySymbol(String symbol);
+    Optional<Alarm> findBySymbol(String symbol); // in order to check that only one alarm is added for a stock symbol
     List<Alarm> findByUser(UserEntity user);
     List<Alarm> findAllByActiveIsTrue();
 }

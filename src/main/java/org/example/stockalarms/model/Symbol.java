@@ -12,7 +12,7 @@ import lombok.*;
 public class Symbol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @Column(name = "name",unique = true)
     private String name;
 }

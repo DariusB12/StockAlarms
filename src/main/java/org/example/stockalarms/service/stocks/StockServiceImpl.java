@@ -41,7 +41,8 @@ public class StockServiceImpl implements StockService {
         StockDTO stockDTO = alphaVantageUtils.getStockDTO(response);
 
         return Response.builder()
-                .stockDTO(stockDTO)
+                .stock(stockDTO)
+                .dateTime(LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))))
                 .message("stock retrieved with success")
                 .statusCode(HttpStatus.OK.value())
                 .build();

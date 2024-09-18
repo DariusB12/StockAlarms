@@ -5,7 +5,7 @@ import org.example.stockalarms.dto.AlarmDTO;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AlarmValidator implements IValidator<AlarmDTO> {
+public class AlarmDTOValidator implements IValidator<AlarmDTO> {
     @Override
     public void validate(AlarmDTO entity) throws ValidationException {
         String errors = "";

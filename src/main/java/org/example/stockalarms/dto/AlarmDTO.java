@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class AlarmDTO {
+    private Integer id; // if multiple alarms are added, identify them by id
     private String symbol;
     private Double initialPrice;
     private Double variance; // [-100,100] percentage

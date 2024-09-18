@@ -13,17 +13,17 @@ import java.util.List;
 /**
  * This class intend to encapsulate any response given by the backend side to the client.
  * It provides all the necessary data that a client can request
- * along with a status code, a response message and a boolean flag.
- * (easier for frontend side to detect success or failure using this flag)
+ * along with a status code, a response message
  */
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Response {
+    List<AlarmDTO> alarms;
     List<String> stockSymbols;
-    StockDTO stockDTO;
-    AlarmDTO alarmDTO;
+    StockDTO stock;
+    AlarmDTO alarm;
     Integer statusCode;
     String message;
     LocalDateTime dateTime;

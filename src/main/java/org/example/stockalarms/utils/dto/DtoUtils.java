@@ -7,11 +7,13 @@ import org.example.stockalarms.exceptions.customExceptions.ValidationException;
 import org.example.stockalarms.model.Alarm;
 import org.example.stockalarms.model.UserEntity;
 import org.example.stockalarms.model.repo.UserRepo;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * class used to convert entities from DTO to their original type or reverse
+ */
 @RequiredArgsConstructor
 @Service
 public class DtoUtils {
@@ -32,6 +34,7 @@ public class DtoUtils {
 
     public AlarmDTO toDto(Alarm alarm) {
         return AlarmDTO.builder()
+                .id(alarm.getId())
                 .symbol(alarm.getSymbol())
                 .initialPrice(alarm.getInitialPrice())
                 .variance(alarm.getVariance())
@@ -40,4 +43,5 @@ public class DtoUtils {
                 .email(alarm.getUser().getEmail())
                 .build();
     }
+
 }

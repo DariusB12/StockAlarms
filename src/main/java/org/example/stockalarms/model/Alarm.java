@@ -17,7 +17,7 @@ public class Alarm{
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private String symbol;
     private Double initialPrice;

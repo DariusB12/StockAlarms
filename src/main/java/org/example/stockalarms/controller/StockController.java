@@ -1,10 +1,8 @@
 package org.example.stockalarms.controller;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.example.stockalarms.utils.Response;
 import org.example.stockalarms.service.stocks.StockService;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -23,6 +21,11 @@ public class StockController {
         return stockService.getAllStockSymbols();
     }
 
+    /**
+     * Retrieves the latest stock data available on alpha vantage api
+     * @param symbol the stock symbol for which it retrieves the data
+     * @return Response containing the stock data information
+     */
     @GetMapping("/{symbol}")
     public Response getStockData(@PathVariable String symbol){
         return stockService.getStockData(symbol);
