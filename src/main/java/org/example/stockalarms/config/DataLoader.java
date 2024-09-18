@@ -3,15 +3,11 @@ package org.example.stockalarms.config;
 import lombok.RequiredArgsConstructor;
 import org.example.stockalarms.model.Symbol;
 import org.example.stockalarms.model.repo.SymbolRepo;
-import org.example.stockalarms.utils.Response;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -35,7 +31,7 @@ public class DataLoader implements CommandLineRunner {
     /**
      * Retrieve from the .csv file all the alphaVantage symbols
      */
-    public List<Symbol> getAllStockSymbols() {
+    private List<Symbol> getAllStockSymbols() {
         List<Symbol> symbols = new ArrayList<>();
         try{
             Scanner scanner = new Scanner(new File("src/main/resources/nasdaq_stock_symbols.csv"));

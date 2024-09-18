@@ -13,7 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = AlphaVantageServiceITConfiguration.class)
@@ -31,6 +31,7 @@ public class AlphaVantageServiceIT {
         assertNotNull(response);
         assertNotNull(response.getMetaData());
         assertNotNull(response.getTimeSeries());
+        assertNull(response.getError());
 
         MetaData metaData = response.getMetaData();
         assertNotNull(metaData.getInformation());
@@ -52,6 +53,15 @@ public class AlphaVantageServiceIT {
             assertNotNull(value.getClose());
             assertNotNull(value.getVolume());
         }
+    }
+    @Test
+    public void whenRequestTimeSeriesIntraday_thenReturnError(){
+        TimeSeriesIntradayResponse response = alphaVantageService.getTimeSeriesIntradayResponse("");
+
+        assertNotNull(response);
+        assertNull(response.getMetaData());
+        assertNull(response.getTimeSeries());
+        assertNotNull(response.getError());
     }
 
 }

@@ -15,4 +15,5 @@ public interface AlarmService {
      * @throws ValidationException if the AlarmDTO data is not valid
      */
     Response addAlarm(AlarmDTO alarm) throws AlarmAlreadyDefinedException, ValidationException;
+
 }

@@ -15,4 +15,7 @@ public class TimeSeriesIntradayResponse {
 
     @JsonProperty("Time Series (5min)")
     private Map<String, TimeSeries> timeSeries;
+
+    @JsonProperty("Error Message")
+    private String error;
 }

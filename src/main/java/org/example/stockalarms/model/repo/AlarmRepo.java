@@ -12,4 +12,5 @@ import java.util.Optional;
 public interface AlarmRepo extends JpaRepository<Alarm,Integer> {
     Optional<Alarm> findBySymbol(String symbol);
     List<Alarm> findByUser(UserEntity user);
+    List<Alarm> findAllByActiveIsTrue();
 }

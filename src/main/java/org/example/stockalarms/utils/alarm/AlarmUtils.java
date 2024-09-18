@@ -57,6 +57,7 @@ public class AlarmUtils {
             // negative target = > check if the variance is below it
             if (variance <= target) {
                 alarm.setActive(false);
+                alarm.setVariance(null);
                 emailService.sendHtmlEmail(alarm.getUser().getEmail(),
                         emailUtils.getStockEmailSubject(alarm.getSymbol()),
                             emailUtils.getHtmlStockAlarmPage(alarm,false));
@@ -66,6 +67,7 @@ public class AlarmUtils {
             // positive target = > check if the variance is over the target
              if(variance >= target){
                  alarm.setActive(false);
+                 alarm.setVariance(null);
                  emailService.sendHtmlEmail(alarm.getUser().getEmail(),
                          emailUtils.getStockEmailSubject(alarm.getSymbol()),
                          emailUtils.getHtmlStockAlarmPage(alarm,true));
