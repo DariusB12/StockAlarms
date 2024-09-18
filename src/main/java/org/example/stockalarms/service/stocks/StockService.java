@@ -1,5 +1,6 @@
 package org.example.stockalarms.service.stocks;
 
+import org.example.stockalarms.exceptions.customExceptions.AlphaVantageException;
 import org.example.stockalarms.utils.Response;
 
 public interface StockService {
@@ -14,5 +15,5 @@ public interface StockService {
      * @param symbol the alphaVantage symbol
      * @return Response with the StockDTO containing the latest alphaVantage data
      */
-    Response getStockData(String symbol);
+    Response getStockData(String symbol) throws AlphaVantageException;
 }

@@ -2,6 +2,7 @@ package org.example.stockalarms.service.alarm;
 
 import lombok.RequiredArgsConstructor;
 import org.example.stockalarms.exceptions.customExceptions.AlarmAlreadyDefinedException;
+import org.example.stockalarms.exceptions.customExceptions.AlphaVantageException;
 import org.example.stockalarms.exceptions.customExceptions.ValidationException;
 import org.example.stockalarms.model.Alarm;
 import org.example.stockalarms.model.UserEntity;
@@ -29,7 +30,7 @@ public class AlarmServiceImpl implements AlarmService{
     private final DtoUtils dtoUtils;
     private final UserRepo userRepo;
     @Override
-    public Response addAlarm(AlarmDTO alarm) throws AlarmAlreadyDefinedException, ValidationException {
+    public Response addAlarm(AlarmDTO alarm) throws AlarmAlreadyDefinedException, ValidationException, AlphaVantageException {
         alarmDTOValidator.validate(alarm);
 
         //check so that no alarm is already defined for that stock symbol

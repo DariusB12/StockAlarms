@@ -1,6 +1,7 @@
 package org.example.stockalarms.service.alarm;
 
 import org.example.stockalarms.exceptions.customExceptions.AlarmAlreadyDefinedException;
+import org.example.stockalarms.exceptions.customExceptions.AlphaVantageException;
 import org.example.stockalarms.exceptions.customExceptions.ValidationException;
 import org.example.stockalarms.utils.Request;
 import org.example.stockalarms.utils.Response;
@@ -15,7 +16,7 @@ public interface AlarmService {
      * @throws AlarmAlreadyDefinedException if an alarm already exists for that stock symbol
      * @throws ValidationException if the AlarmDTO data is not valid
      */
-    Response addAlarm(AlarmDTO alarm) throws AlarmAlreadyDefinedException, ValidationException;
+    Response addAlarm(AlarmDTO alarm) throws AlarmAlreadyDefinedException, ValidationException, AlphaVantageException;
 
     /**
      * Retrieves from DB all the alarms defined by the specified user email

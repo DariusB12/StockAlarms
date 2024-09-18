@@ -2,6 +2,7 @@ package org.example.stockalarms.utils.alarm;
 
 import lombok.RequiredArgsConstructor;
 import org.example.stockalarms.dto.StockDTO;
+import org.example.stockalarms.exceptions.customExceptions.AlphaVantageException;
 import org.example.stockalarms.model.Alarm;
 import org.example.stockalarms.service.alphaVantage.AlphaVantageService;
 import org.example.stockalarms.service.email.EmailServiceImpl;
@@ -23,7 +24,7 @@ public class AlarmUtils {
      * updates the variance of it and sends an email if the alarm should be triggered
      * @return the updated alarm
      */
-    public Alarm updateAlarmData(Alarm alarm){
+    public Alarm updateAlarmData(Alarm alarm) throws AlphaVantageException {
         TimeSeriesIntradayResponse response = alphaVantageService.getTimeSeriesIntradayResponse(alarm.getSymbol());
         StockDTO stockDTO = alphaVantageUtils.getStockDTO(response);
         //update the alarm variance;

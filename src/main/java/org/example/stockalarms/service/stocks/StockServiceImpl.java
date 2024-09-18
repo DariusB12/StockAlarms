@@ -1,6 +1,7 @@
 package org.example.stockalarms.service.stocks;
 
 import lombok.RequiredArgsConstructor;
+import org.example.stockalarms.exceptions.customExceptions.AlphaVantageException;
 import org.example.stockalarms.model.Symbol;
 import org.example.stockalarms.model.repo.SymbolRepo;
 import org.example.stockalarms.service.alphaVantage.AlphaVantageService;
@@ -36,7 +37,7 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public Response getStockData(String symbol) {
+    public Response getStockData(String symbol) throws AlphaVantageException {
         TimeSeriesIntradayResponse response = alphaVantageService.getTimeSeriesIntradayResponse(symbol);
         StockDTO stockDTO = alphaVantageUtils.getStockDTO(response);
 

@@ -4,6 +4,7 @@ package org.example.stockalarms.concurrency;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.example.stockalarms.exceptions.customExceptions.AlphaVantageException;
 import org.example.stockalarms.model.Alarm;
 import org.example.stockalarms.model.repo.AlarmRepo;
 import org.example.stockalarms.utils.alarm.AlarmUtils;
@@ -29,8 +30,15 @@ public class AlarmMonitoringService{
     @Scheduled(fixedRateString = "${alarm.polling.interval}", timeUnit = TimeUnit.SECONDS)
     public void monitorAlarms(){
         for(Alarm alarm : alarmRepo.findAllByActiveIsTrue()){
-            concurrencyManager.submitTask(()-> alarmRepo.save(alarmUtils.updateAlarmData(alarm)));
-            System.out.println("Alarm: " + alarm + " was updated-------------------------------");
+            concurrencyManager.submitTask(()-> {
+                try {
+                    alarmRepo.save(alarmUtils.updateAlarmData(alarm));
+                } catch (AlphaVantageException e) {
+                    Thread.currentThread().interrupt();
+                    System.out.println("Alarm: " + alarm + " couldn't be updated ------------------------------- AlphaVantageException");
+                }
+            });
+            System.out.println("Alarm: " + alarm + " was updated -------------------------------");
         }
     }
 

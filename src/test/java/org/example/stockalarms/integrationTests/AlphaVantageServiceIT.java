@@ -1,5 +1,6 @@
 package org.example.stockalarms.integrationTests;
 
+import org.example.stockalarms.exceptions.customExceptions.AlphaVantageException;
 import org.example.stockalarms.integrationTests.configuration.AlphaVantageServiceITConfiguration;
 import org.example.stockalarms.service.alphaVantage.AlphaVantageService;
 import org.example.stockalarms.utils.alphaVantage.json.MetaData;
@@ -25,7 +26,7 @@ public class AlphaVantageServiceIT {
      * test that the response retrieved from the alpha vantage api is handled properly
      */
     @Test
-    public void whenRequestTimeSeriesIntraday_thenReturnTimeSeriesIntradayResponse(){
+    public void whenRequestTimeSeriesIntraday_thenReturnTimeSeriesIntradayResponse() throws AlphaVantageException {
         TimeSeriesIntradayResponse response = alphaVantageService.getTimeSeriesIntradayResponse(null);
 
         assertNotNull(response);
@@ -55,7 +56,7 @@ public class AlphaVantageServiceIT {
         }
     }
     @Test
-    public void whenRequestTimeSeriesIntraday_thenReturnError(){
+    public void whenRequestTimeSeriesIntraday_thenReturnError() throws AlphaVantageException {
         TimeSeriesIntradayResponse response = alphaVantageService.getTimeSeriesIntradayResponse("");
 
         assertNotNull(response);
