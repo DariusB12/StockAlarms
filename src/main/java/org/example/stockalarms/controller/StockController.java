@@ -1,6 +1,7 @@
 package org.example.stockalarms.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.stockalarms.exceptions.customExceptions.AlphaVantageException;
 import org.example.stockalarms.utils.Response;
 import org.example.stockalarms.service.stocks.StockService;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class StockController {
      * @return Response containing the stock data information
      */
     @GetMapping("/{symbol}")
-    public Response getStockData(@PathVariable String symbol){
+    public Response getStockData(@PathVariable String symbol) throws AlphaVantageException {
         return stockService.getStockData(symbol);
     }
 }

@@ -3,6 +3,7 @@ package org.example.stockalarms.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.stockalarms.exceptions.customExceptions.AlarmAlreadyDefinedException;
+import org.example.stockalarms.exceptions.customExceptions.AlphaVantageException;
 import org.example.stockalarms.exceptions.customExceptions.ValidationException;
 import org.example.stockalarms.service.alarm.AlarmService;
 import org.example.stockalarms.utils.Request;
@@ -21,7 +22,7 @@ public class AlarmController {
      * @return Response with success http status
      */
     @PostMapping
-    public Response addAlarm(@RequestBody Request request) throws ValidationException, AlarmAlreadyDefinedException {
+    public Response addAlarm(@RequestBody Request request) throws ValidationException, AlarmAlreadyDefinedException, AlphaVantageException {
         return alarmService.addAlarm(request.getAlarm());
     }
 
