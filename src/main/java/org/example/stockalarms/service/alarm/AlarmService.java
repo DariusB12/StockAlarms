@@ -3,7 +3,6 @@ package org.example.stockalarms.service.alarm;
 import org.example.stockalarms.exceptions.customExceptions.AlarmAlreadyDefinedException;
 import org.example.stockalarms.exceptions.customExceptions.AlphaVantageException;
 import org.example.stockalarms.exceptions.customExceptions.ValidationException;
-import org.example.stockalarms.utils.Request;
 import org.example.stockalarms.utils.Response;
 import org.example.stockalarms.dto.AlarmDTO;
 
@@ -32,10 +31,10 @@ public interface AlarmService {
 
 
     /**
-     * Updates the alarm from the DB with the given variance and target
-     * @param request Request entity with the alarm information to be updated
+     * Updates the alarm from the DB with the given id,target and active status
+     * @param alarmDTO entity with the alarm information to be updated
      * @return Response with success status code
      * @throws ValidationException if the alarm id, active status or target is invalid
      */
-    Response updateAlarm(Request request) throws ValidationException;
+    Response updateAlarm(AlarmDTO alarmDTO) throws ValidationException;
 }

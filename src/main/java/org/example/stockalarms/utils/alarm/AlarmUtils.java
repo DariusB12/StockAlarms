@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.stockalarms.dto.StockDTO;
 import org.example.stockalarms.exceptions.customExceptions.AlphaVantageException;
 import org.example.stockalarms.model.Alarm;
+import org.example.stockalarms.model.repo.AlarmRepo;
 import org.example.stockalarms.service.alphaVantage.AlphaVantageService;
 import org.example.stockalarms.service.email.EmailServiceImpl;
 import org.example.stockalarms.utils.alphaVantage.AlphaVantageUtils;
@@ -58,7 +59,6 @@ public class AlarmUtils {
             // negative target = > check if the variance is below it
             if (variance <= target) {
                 alarm.setActive(false);
-                alarm.setVariance(null);
                 emailService.sendHtmlEmail(alarm.getUser().getEmail(),
                         emailUtils.getStockEmailSubject(alarm.getSymbol()),
                             emailUtils.getHtmlStockAlarmPage(alarm,false));
@@ -68,7 +68,6 @@ public class AlarmUtils {
             // positive target = > check if the variance is over the target
              if(variance >= target){
                  alarm.setActive(false);
-                 alarm.setVariance(null);
                  emailService.sendHtmlEmail(alarm.getUser().getEmail(),
                          emailUtils.getStockEmailSubject(alarm.getSymbol()),
                          emailUtils.getHtmlStockAlarmPage(alarm,true));

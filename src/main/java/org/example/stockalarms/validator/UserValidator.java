@@ -18,17 +18,17 @@ public class UserValidator implements IValidator<UserEntity> {
         Pattern p = Pattern.compile(".+@.+\\..+");
         String email = entity.getEmail();
         if (email == null || !p.matcher(email).matches()) {
-            errors += "invalid email\n";
+            throw new ValidationException("invalid email");
         }
 
         //firstName, lastName
         String firstName = entity.getFirstName();
         String lastName = entity.getLastName();
         if (firstName == null || firstName.isEmpty()) {
-            errors += "invalid first name";
+            throw new ValidationException("invalid first name");
         }
         if (lastName == null || lastName.isEmpty()) {
-            errors += "invalid first name";
+            throw new ValidationException("invalid last name name");
         }
 
         //strong pass
@@ -38,13 +38,12 @@ public class UserValidator implements IValidator<UserEntity> {
                 !password.matches(".*[a-z].*") ||
                 !password.matches(".*\\W.*") ||
                 !password.matches(".*[0-9].*"))
-            errors += """
+            throw new ValidationException("""
                     the password should contain at least 1 upperCase letter,
                     1 lower case letter
                     1 number
                     a special character
-                    and it should be at least 8 characters in length""";
-        if (!errors.isEmpty())
-            throw new ValidationException(errors);
+                    and it should be at least 8 characters in length""");
+
     }
 }

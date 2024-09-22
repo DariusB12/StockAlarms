@@ -13,16 +13,16 @@ public class AlarmDTOValidator implements IValidator<AlarmDTO> {
             throw new ValidationException("invalid alarm");
 
         if(entity.getInitialPrice() == null){
-            errors += "invalid initial price";
+            errors += "invalid initial price\n ";
         }
         if(entity.getTarget() == null){
-            errors += "invalid target";
+            errors += "invalid target\n ";
         }
         if(entity.getSymbol() == null){
-            errors += "invalid symbol";
+            errors += "invalid symbol\n ";
         }
         if(entity.getEmail() == null){
-            errors += "invalid email";
+            errors += "invalid email\n ";
         }
 
         if (!errors.isEmpty())

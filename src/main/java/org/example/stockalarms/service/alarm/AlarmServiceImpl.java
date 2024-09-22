@@ -8,7 +8,6 @@ import org.example.stockalarms.model.Alarm;
 import org.example.stockalarms.model.UserEntity;
 import org.example.stockalarms.model.repo.AlarmRepo;
 import org.example.stockalarms.model.repo.UserRepo;
-import org.example.stockalarms.utils.Request;
 import org.example.stockalarms.utils.Response;
 import org.example.stockalarms.dto.AlarmDTO;
 import org.example.stockalarms.utils.alarm.AlarmUtils;
@@ -83,8 +82,7 @@ public class AlarmServiceImpl implements AlarmService{
     }
 
     @Override
-    public Response updateAlarm(Request request) throws ValidationException {
-        AlarmDTO alarmDTO = request.getAlarm();
+    public Response updateAlarm(AlarmDTO alarmDTO) throws ValidationException {
         if(alarmDTO == null || alarmDTO.getId() == null || alarmDTO.getActive() == null || alarmDTO.getTarget() == null)
             throw new ValidationException("the alarm, id, active status or target cannot be null when updating the alarm");
         Optional<Alarm> obj = alarmRepo.findById(alarmDTO.getId());
